@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FileUpload from "../ui/FileUpload";
 import styled from "styled-components";
+import Button from "../ui/Button";
+import axios from "axios"
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -24,17 +26,36 @@ const Container = styled.div`
 function MainPage(props) {
     const {} = props;
     const [file, setFile] = useState("")
+    const formData = new FormData();
+    // formData.append = ("test","abv")
 
     return (
         <Wrapper>
             <Container>
                 <FileUpload 
-                    title="파일업로드"
                     onChange = {(event) => {
                         setFile(event.target.file)
+                        formData.append = ("test","qwe");
+                        
                     }}
                     >
                 </FileUpload>
+                <Button
+                    title = "올리기"
+                    onClick = {()=>{
+                        axios({
+                            method: "POST",
+                            url :"http://127.0.0.1:8000",
+                            mode: "cors",
+                            headers: {"Content-Type": "multipart/form-data",},
+                            data: formData,
+                        }).then(function(response){
+                            console.log(response)
+                            console.log(formData)
+                        })
+      
+                    }}
+                />
             </Container>
         </Wrapper>
     )
