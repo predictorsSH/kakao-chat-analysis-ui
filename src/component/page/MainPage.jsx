@@ -26,28 +26,29 @@ const Container = styled.div`
 function MainPage(props) {
     const {} = props;
     const [file, setFile] = useState("")
-    const formData = new FormData();
-    // formData.append = ("test","abv")
+
 
     return (
         <Wrapper>
             <Container>
                 <FileUpload 
                     onChange = {(event) => {
-                        setFile(event.target.file)
-                        formData.append = ("test","qwe");
-                        
+                        const uploadFile = event.target.files[0]
+                        setFile(uploadFile)
+                        console.log(uploadFile)
                     }}
                     >
                 </FileUpload>
                 <Button
                     title = "올리기"
                     onClick = {()=>{
+                        const formData = new FormData();
+                        formData.append('file',file)
+                        console.log("useState")
+                        console.log(file)
                         axios({
                             method: "POST",
                             url :"http://127.0.0.1:8000",
-                            mode: "cors",
-                            headers: {"Content-Type": "multipart/form-data",},
                             data: formData,
                         }).then(function(response){
                             console.log(response)
