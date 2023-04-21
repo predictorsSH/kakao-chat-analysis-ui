@@ -13,7 +13,7 @@ const StyledCardButton = styled.div`
   height: 48px;
   padding: 12px 16px;
   transition: all 0.3s ease;
-  width: 25%;
+  width: 50%;
 
   &:hover {
     background-color: #f5f5f5;
