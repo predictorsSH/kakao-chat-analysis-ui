@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CardButton from "../ui/CardButton";
 import axios from "axios";
+import GraphPopup from "../charts/Popup";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,6 +20,16 @@ const Wrapper = styled.div`
 
 function AnalysisCard (props) {
     const {f_id} = props;
+    const [data, setData] = useState("");
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    function handleOpenPopup() {
+      setIsPopupOpen(true);
+    }
+  
+    function handleClosePopup() {
+      setIsPopupOpen(false);
+    }
 
     return (
         <Wrapper>
@@ -28,8 +39,10 @@ function AnalysisCard (props) {
                 onClick = {()=>{
                     axios.get(`http://127.0.0.1:8000/usercount/${f_id}`)
                         .then((response) => {
-                            const data = JSON.parse(response.data.user_count)
-                            console.log(data)
+                            const responseData = JSON.parse(response.data.user_count)
+                            setData(responseData)
+                            console.log("clicked card")
+                            handleOpenPopup()
                         })
                 }}>
 
@@ -41,6 +54,7 @@ function AnalysisCard (props) {
                 }}>
 
             </CardButton>
+            <GraphPopup data={data} isOpen={isPopupOpen} onClose={handleClosePopup}/>
 
         </Wrapper>
     )

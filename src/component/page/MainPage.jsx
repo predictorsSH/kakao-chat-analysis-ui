@@ -6,6 +6,7 @@ import axios from "axios"
 import FileSubmit from "../part/FileSubmit";
 import AnalysisCard from "../part/AnalysisCard";
 
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -82,5 +83,6 @@ function MainPage(props) {
         
     )
 }
+
 
 export default MainPage;
