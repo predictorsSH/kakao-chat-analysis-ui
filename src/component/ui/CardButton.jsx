@@ -23,9 +23,9 @@ const StyledCardButton = styled.div`
 `;
 
 function CardButton(props) {
-  const { label, onClick } = props;
+  const { f_id ,label, onClick } = props;
 
-  return <StyledCardButton onClick={onClick}>{label}</StyledCardButton>;
+  return <StyledCardButton f_id={f_id} onClick={onClick}>{label}</StyledCardButton>;
 }
 
 export default CardButton;

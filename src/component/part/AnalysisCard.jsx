@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CardButton from "../ui/CardButton";
+import axios from "axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,14 +18,19 @@ const Wrapper = styled.div`
 `;
 
 function AnalysisCard (props) {
-    const {} = props;
+    const {f_id} = props;
 
     return (
         <Wrapper>
             <CardButton
+                f_id = {f_id}
                 label = "누가 가장 말이 많을까?"
                 onClick = {()=>{
-                    console.log('clicked CardButton')
+                    axios.get(`http://127.0.0.1:8000/usercount/${f_id}`)
+                        .then((response) => {
+                            const data = JSON.parse(response.data.user_count)
+                            console.log(data)
+                        })
                 }}>
 
             </CardButton>

@@ -46,6 +46,7 @@ const Title = styled.h1`
 function MainPage(props) {
     const {} = props;
     const [file, setFile] = useState("")
+    const [f_id, setFid] = useState("")
 
     return (
         <Wrapper>
@@ -68,12 +69,14 @@ function MainPage(props) {
                         url :"http://127.0.0.1:8000",
                         data: formData,
                     }).then(function(response){
-                        console.log(response)
+                        console.log(response.data.f_id)
+                        setFid(response.data.f_id)
+                        
                     })
 
                 }}
                 />
-                <AnalysisCard></AnalysisCard>
+                <AnalysisCard f_id={f_id}></AnalysisCard>
             </Container>
         </Wrapper>
         
