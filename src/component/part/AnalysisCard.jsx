@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CardButton from "../ui/CardButton";
 import axios from "axios";
 import GraphPopup from "../charts/Popup";
+import Button from "../ui/Button";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,6 +34,15 @@ function AnalysisCard (props) {
 
     return (
         <Wrapper>
+            <Button
+                title = "분석하기"
+                onClick = {()=>{
+                    axios.post(`http://127.0.0.1:8000/basic-analysis/${f_id}`)
+                        .then((response) => {
+                            console.log("clicked card")
+                        })
+                }}>
+            </Button>          
             <CardButton
                 f_id = {f_id}
                 label = "누가 가장 말이 많을까?"
