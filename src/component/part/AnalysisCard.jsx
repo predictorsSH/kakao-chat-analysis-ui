@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CardButton from "../ui/CardButton";
 import axios from "axios";
-import GraphPopup from "../charts/Popup";
+import UserCountPopup from "../charts/UserCount";
+import ActiveTimePopup from "../charts/ActiveTime";
 import Button from "../ui/Button";
 
 const Wrapper = styled.div`
@@ -23,6 +24,7 @@ function AnalysisCard (props) {
     const {f_id} = props;
     const [data, setData] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isActiveTimePopupOpen, setIsActiveTimePopupOpen] = useState(false);
 
     function handleOpenPopup() {
       setIsPopupOpen(true);
@@ -31,6 +33,14 @@ function AnalysisCard (props) {
     function handleClosePopup() {
       setIsPopupOpen(false);
     }
+
+    function handleOpenActiveTimePopup() {
+        setIsActiveTimePopupOpen(true);
+      }
+    
+      function handleCloseActiveTimePopup() {
+        setIsActiveTimePopupOpen(false);
+      }
 
     return (
         <Wrapper>
@@ -60,12 +70,17 @@ function AnalysisCard (props) {
             <CardButton
                 label = "대화가 가장 활발한 시간은?"
                 onClick = {()=>{
-                    console.log('clicked CardButton')
+                    axios.get(`http://127.0.0.1:8000/activetime/${f_id}`)
+                    .then((response) => {
+                        const responseData = JSON.parse(response.data.active_time)
+                        setData(responseData)
+                        handleOpenActiveTimePopup()
+                    })
                 }}>
 
             </CardButton>
-            <GraphPopup data={data} isOpen={isPopupOpen} onClose={handleClosePopup}/>
-
+            <UserCountPopup data={data} isOpen={isPopupOpen} onClose={handleClosePopup}/>
+            <ActiveTimePopup data={data} isOpen={isActiveTimePopupOpen} onClose={handleCloseActiveTimePopup}/>
         </Wrapper>
     )
 }
