@@ -32,6 +32,7 @@ const Frame = styled.div`
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  opacity: ${({ isAvailable }) => (isAvailable ? 1 : 0.5)};
 `;
 
 const CardButtonContainer = styled(Frame)`
@@ -45,6 +46,7 @@ function AnalysisCard (props) {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isActiveTimePopupOpen, setIsActiveTimePopupOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isAvailable, setIsAvailable] = useState(false)
 
     function handleOpenPopup() {
       setIsPopupOpen(true);
@@ -72,6 +74,7 @@ function AnalysisCard (props) {
                         .then((response) => {
                             console.log("clicked card")
                             setIsLoading(false);
+                            setIsAvailable(true)
                         })
                 }}>
             </Button> 
@@ -82,7 +85,7 @@ function AnalysisCard (props) {
                     </div>
                 )}
             </div> 
-            <CardButtonContainer>        
+            <CardButtonContainer isAvailable={isAvailable}>        
             <CardButton
                 f_id = {f_id}
                 label = "제일 말 많은 사람 누구?"
