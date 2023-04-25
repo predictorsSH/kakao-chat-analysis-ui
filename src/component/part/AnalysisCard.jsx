@@ -5,6 +5,7 @@ import axios from "axios";
 import UserCountPopup from "../charts/UserCount";
 import ActiveTimePopup from "../charts/ActiveTime";
 import Button from "../ui/Button";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,6 +44,7 @@ function AnalysisCard (props) {
     const [data, setData] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isActiveTimePopupOpen, setIsActiveTimePopupOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleOpenPopup() {
       setIsPopupOpen(true);
@@ -65,12 +67,21 @@ function AnalysisCard (props) {
             <Button
                 title = "분석"
                 onClick = {()=>{
+                    setIsLoading(true)
                     axios.post(`http://127.0.0.1:8000/basic-analysis/${f_id}`)
                         .then((response) => {
                             console.log("clicked card")
+                            setIsLoading(false);
                         })
                 }}>
-            </Button>  
+            </Button> 
+            <div>
+                {isLoading && <LoadingSpinner />}
+                {!isLoading && (
+                    <div>
+                    </div>
+                )}
+            </div> 
             <CardButtonContainer>        
             <CardButton
                 f_id = {f_id}
@@ -135,6 +146,7 @@ function AnalysisCard (props) {
             </CardButtonContainer>
             <UserCountPopup data={data} isOpen={isPopupOpen} onClose={handleClosePopup}/>
             <ActiveTimePopup data={data} isOpen={isActiveTimePopupOpen} onClose={handleCloseActiveTimePopup}/>
+
         </Wrapper>
     )
 }
