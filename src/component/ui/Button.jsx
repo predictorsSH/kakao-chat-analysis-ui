@@ -32,6 +32,7 @@ const StyledButton = styled.button`
   padding: 20px 50px;
   margin-top: 50px;
   transition: all 0.3s ease;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: #fff;

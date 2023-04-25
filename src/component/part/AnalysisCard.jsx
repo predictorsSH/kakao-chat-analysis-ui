@@ -10,15 +10,33 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column; /* 수직축으로 정렬합니다. */ 
   align-items: center; /* 수직축으로 중앙에 정렬합니다. */
-  justify-content: center;
-  padding: 50pt;
-  height: 100vh;
-  width: 50%;
+//   justify-content: flex-start;
+//   padding: 50pt;
+//   height: 100vh;
+//   width: 100%;
 
   & > * {
     margin-bottom: 10px; /* 간격을 조절할 값을 입력합니다. */
   }
 `;
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  width: 800px;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+`;
+
+const CardButtonContainer = styled(Frame)`
+  margin: 20px;
+`;
+
 
 function AnalysisCard (props) {
     const {f_id} = props;
@@ -45,17 +63,18 @@ function AnalysisCard (props) {
     return (
         <Wrapper>
             <Button
-                title = "분석하기"
+                title = "분석"
                 onClick = {()=>{
                     axios.post(`http://127.0.0.1:8000/basic-analysis/${f_id}`)
                         .then((response) => {
                             console.log("clicked card")
                         })
                 }}>
-            </Button>          
+            </Button>  
+            <CardButtonContainer>        
             <CardButton
                 f_id = {f_id}
-                label = "누가 가장 말이 많을까?"
+                label = "제일 말 많은 사람 누구?"
                 onClick = {()=>{
                     axios.get(`http://127.0.0.1:8000/usercount/${f_id}`)
                         .then((response) => {
@@ -68,7 +87,7 @@ function AnalysisCard (props) {
 
             </CardButton>
             <CardButton
-                label = "대화가 가장 활발한 시간은?"
+                label = "우리 대화의 피크 타임은 언제?"
                 onClick = {()=>{
                     axios.get(`http://127.0.0.1:8000/activetime/${f_id}`)
                     .then((response) => {
@@ -79,6 +98,41 @@ function AnalysisCard (props) {
                 }}>
 
             </CardButton>
+            <CardButton
+                label = "그래서 하고싶은 말이 뭔데?"
+                onClick = {()=>{
+                    axios.get(`http://127.0.0.1:8000/activetime/${f_id}`)
+                    .then((response) => {
+                        const responseData = JSON.parse(response.data.active_time)
+                        setData(responseData)
+                        handleOpenActiveTimePopup()
+                    })
+                }}>
+
+            </CardButton>
+            <CardButton
+                label = "누군가 누가 우리에게 웃음을 제일 많이 줬는가"
+                onClick = {()=>{
+                    axios.get(`http://127.0.0.1:8000/activetime/${f_id}`)
+                    .then((response) => {
+                        const responseData = JSON.parse(response.data.active_time)
+                        setData(responseData)
+                        handleOpenActiveTimePopup()
+                    })
+                }}>
+            </CardButton>
+            <CardButton
+                label = "리액션 혜자는 누구?"
+                onClick = {()=>{
+                    axios.get(`http://127.0.0.1:8000/activetime/${f_id}`)
+                    .then((response) => {
+                        const responseData = JSON.parse(response.data.active_time)
+                        setData(responseData)
+                        handleOpenActiveTimePopup()
+                    })
+                }}>
+            </CardButton>
+            </CardButtonContainer>
             <UserCountPopup data={data} isOpen={isPopupOpen} onClose={handleClosePopup}/>
             <ActiveTimePopup data={data} isOpen={isActiveTimePopupOpen} onClose={handleCloseActiveTimePopup}/>
         </Wrapper>

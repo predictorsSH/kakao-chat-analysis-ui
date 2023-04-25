@@ -7,9 +7,10 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  // align-items: center;
   justify-content: center;
-  height: 100vh;
+  // height: 100vh;
 `;
 
 const Container = styled.div`
@@ -17,7 +18,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 300px;
+  height: 270px;
   padding: 50px;
   background-color: #fff;
   border-radius: 20px;
@@ -25,9 +27,9 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 36px;
+  font-size: 25px;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   color: #555;
 `;
 
@@ -40,7 +42,7 @@ const UploadButton = styled.label`
   border: 2px solid #999;
   border-radius: 20px;
   font-size: 24px;
-  padding: 30px 50px;
+  padding: 15px 30px;
   cursor: pointer;
   transition: all 0.3s ease;
 

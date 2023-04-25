@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import FileUpload from "../ui/FileUpload";
 import styled from "styled-components";
 import axios from "axios"
-
 import FileSubmit from "../part/FileSubmit";
 import AnalysisCard from "../part/AnalysisCard";
 
@@ -10,17 +8,18 @@ import AnalysisCard from "../part/AnalysisCard";
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-center;
-    justify-content: flex-center ;
-    padding: 10pt;
+    // align-items: center;
+    // justify-content: center ;    
+    // padding: 10pt;
     `;
 
 const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10pt;
-    height: 100vh;
+    padding: 150pt;
+    
+    // height: 100vh;
 
     & > * {
     margin-right: 10px; /* 간격을 원하는 만큼 설정합니다. */
@@ -36,12 +35,14 @@ const Title = styled.h1`
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-weight: 700;
     font-size: 4rem;
-    color: black;
-    // text-shadow: 2px 2px 2px #FFD700;
-    background-color: #f8f8f8;
+    color: #444444;
+    text-shadow: 2px 2px 2px #c4c4c4;
+    background-color: transparent;
     padding: 15px;
-    box-shadow: 0px 4px 4px -2px #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   `;
 
 function MainPage(props) {
