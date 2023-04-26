@@ -5,12 +5,6 @@ import Cloud from 'react-d3-cloud';
 
 Modal.setAppElement('#root');
 
-const ChartContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
 
 function WordCloudPopup({ isOpen, onClose, data }){
 
@@ -22,26 +16,11 @@ function WordCloudPopup({ isOpen, onClose, data }){
 
 
 
-    // console.log(words)
-    // console.log("chartData-------------")
-    // console.log(chartData)
-        
-
-    // const chartData = [
-    //     { text: 'Hey', value: 1000 },
-    //     { text: 'lol', value: 200 },
-    //     { text: 'first impression', value: 800 },
-    //     { text: 'very cool', value: 1000000 },
-    //     { text: 'duck', value: 10 },
-    //   ];
-    
-
-
     return(
         <Modal isOpen={isOpen} onRequestClose={onClose}
         style={{
-            content:{width:'700px',
-                    height:'700px',
+            content:{width:'1000px',
+                    height:'1000px',
                     top:'50%' ,
                     left:'50%',
                     transform: 'translate(-50%, -50%)'
@@ -50,7 +29,7 @@ function WordCloudPopup({ isOpen, onClose, data }){
         {/* <ChartContainer> */}
         <Cloud
         data = {chartData}
-        rotate={(word) => word.value % 360} font='Times' width={500} height={500} padding={5} spiral='archimedean'
+        rotate={(word) => word.value % 360} font='Times' width={600} height={600} padding={5} spiral='archimedean'
         fontWeight="bold" fontSize={(word) => Math.log2(word.value) * 3}
         fontStyle="italic"
         />
