@@ -20,6 +20,7 @@ const Spinner = styled.div`
   border: 2px solid #333;
   border-top-color: transparent;
   animation: ${spin} 1s ease-in-out infinite;
+  margin-top: 10px;
 `;
 
 const Text = styled.span`

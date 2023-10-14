@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import FileUpload from "../ui/FileUpload";
 import styled from "styled-components";
 import Button from "../ui/Button";
-
+import RowButtonWrapper from "../ui/RowButtonWrapper";
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: center;
   justify-content: center;
-  // height: 100vh;
 `;
 
 const Container = styled.div`
@@ -18,8 +16,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 270px;
+  // width: 300px;
+  // height: 270px;
   padding: 50px;
   background-color: #fff;
   border-radius: 20px;
@@ -56,17 +54,22 @@ const UploadButton = styled.label`
 
 
 function FileSubmit(props) {
-    const { onChange, onClick } = props;
+    const { onChange, onClick, onAnalysis} = props;
 
     return (
         <Wrapper>
             <Container>
                 <Title>파일 업로드</Title>
+                <h4>분석하고싶은 채팅방 데이터를 선택하세요</h4>
                 <UploadButton htmlFor="fileInput" >
                     <FaCloudUploadAlt size={32} style={{marginRight:'10px'}}/>
                     <FileUpload id="fileInput" onChange={onChange}/>
                 </UploadButton>
-                <Button title='제출' onClick = {onClick}></Button>
+                <RowButtonWrapper>
+                  <Button title='제출' onClick = {onClick}></Button>
+                  <Button title='분석' onClick = {onAnalysis}></Button>
+
+                </RowButtonWrapper>
             </Container>
         </Wrapper>
 

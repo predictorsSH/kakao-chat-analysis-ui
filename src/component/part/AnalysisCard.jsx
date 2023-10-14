@@ -42,14 +42,14 @@ const CardButtonContainer = styled(Frame)`
 
 
 function AnalysisCard (props) {
-    const {f_id} = props;
+    const {f_id, isAvailable} = props;
     const [data, setData] = useState("");
     const [cloudData, setCloudData] = useState("")
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isActiveTimePopupOpen, setIsActiveTimePopupOpen] = useState(false);
     const [isAllUserWordsPopupOpen, setIsAllUserWordsPopupOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isAvailable, setIsAvailable] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [isAvailable, setIsAvailable] = useState(false)
 
     function handleOpenPopup() {
       setIsPopupOpen(true);
@@ -75,9 +75,10 @@ function AnalysisCard (props) {
     setIsAllUserWordsPopupOpen(false);
     }
 
+    
     return (
         <Wrapper>
-            <Button
+            {/* <Button
                 title = "분석"
                 onClick = {()=>{
                     setIsLoading(true)
@@ -95,7 +96,7 @@ function AnalysisCard (props) {
                     <div>
                     </div>
                 )}
-            </div> 
+            </div>  */}
             <CardButtonContainer isAvailable={isAvailable}>        
             <CardButton
                 f_id = {f_id}

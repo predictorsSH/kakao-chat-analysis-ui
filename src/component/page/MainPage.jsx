@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios"
 import FileSubmit from "../part/FileSubmit";
 import AnalysisCard from "../part/AnalysisCard";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import { API } from "../../config/config";
 
 
 const Wrapper = styled.div`
@@ -17,7 +19,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 150pt;
+   
     
     // height: 100vh;
 
@@ -30,34 +32,52 @@ const Container = styled.div`
     }
     `;
 
-const Title = styled.h1`
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: 700;
-    font-size: 4rem;
-    color: #444444;
-    text-shadow: 2px 2px 2px #c4c4c4;
-    background-color: transparent;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  `;
+const SubmitContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px;
+`
 
+const Title = styled.h1`
+  font-size: 3rem;
+  color: #000000;
+  text-align: center;
+  margin-top: 2rem;
+  background-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10vh 0;
+  
+`;
+
+ const ProcessStatusText = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+ 
+ `
+  
 function MainPage(props) {
     const {} = props;
     const [file, setFile] = useState("")
     const [f_id, setFid] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
+    const [analysisAvailable, setAnalysisAvailable] = useState(false);
+    const [processStatus, setProcessStatus] = useState("파일을 선택하고 제출해 주세요");
+
+    
 
     return (
         <Wrapper>
-            <Title>카카오 채팅방 분석하기</Title>
+            <Title>who are we</Title>
+
             <Container>
+                <SubmitContainer>
                 <FileSubmit
                 onChange = {(event) => {
                     const uploadFile = event.target.files[0]
                     setFile(uploadFile)
+                    setAnalysisAvailable(false)
+                    setProcessStatus("제출 버튼을 클릭해주세요")
                     console.log(uploadFile)
                 }}
 
@@ -75,10 +95,29 @@ function MainPage(props) {
                         setFid(response.data.f_id)
                         
                     })
+                    setProcessStatus("파일을 제출했습니다. 분석 버튼을 클릭하세요")
+                }}
 
+                onAnalysis = {()=>{
+                    setIsLoading(true)
+                    axios.post(`${API.ANALYSIS}${f_id}`)
+                    .then((response) => {
+                        setIsLoading(false);
+                        setAnalysisAvailable(true);
+                        setProcessStatus("분석이 완료 되었습니다.")
+                    })
                 }}
                 />
-                <AnalysisCard f_id={f_id}></AnalysisCard>
+                {isLoading && <LoadingSpinner />}
+                {!isLoading && (
+                    <ProcessStatusText>
+                        {processStatus}
+                    </ProcessStatusText>
+                )}
+                </SubmitContainer>
+            
+                <AnalysisCard f_id={f_id} isAvailable = {analysisAvailable} ></AnalysisCard>
+                
             </Container>
         </Wrapper>
         

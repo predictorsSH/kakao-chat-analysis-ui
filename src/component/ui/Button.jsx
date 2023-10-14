@@ -28,9 +28,9 @@ const StyledButton = styled.button`
   border-radius: 20px;
   color: #fff;
   cursor: pointer;
-  font-size: 24px;
-  padding: 20px 50px;
-  margin-top: 50px;
+  font-size: 20px;
+  padding: 15px 40px;
+  margin-top: 15px;
   transition: all 0.3s ease;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 
